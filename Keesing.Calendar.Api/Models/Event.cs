@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace keesing.Calendar.Api.Models
+namespace Keesing.Calendar.Api.Models
 {
     public class Event
     {
