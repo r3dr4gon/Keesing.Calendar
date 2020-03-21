@@ -1,8 +1,5 @@
-﻿using keesing.Calendar.Api.Models;
+﻿using Keesing.Calendar.Api.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Keesing.Calendar.Api.Services
 {
@@ -13,12 +10,12 @@ namespace Keesing.Calendar.Api.Services
             throw new NotImplementedException();
         }
 
-        public void DeleteEvent(int id)
+        public bool DeleteEvent(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void EditEvent(Event @event)
+        public bool EditEvent(Event @event)
         {
             throw new NotImplementedException();
         }

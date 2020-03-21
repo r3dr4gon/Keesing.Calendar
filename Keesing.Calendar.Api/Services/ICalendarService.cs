@@ -6,9 +6,9 @@ namespace Keesing.Calendar.Api.Services
     {
         void AddEvent(Event @event);
 
-        void EditEvent(Event @event);
+        bool EditEvent(Event @event);
 
-        void DeleteEvent(int id);
+        bool DeleteEvent(int id);
 
         Event GetEventById(int id);
 
