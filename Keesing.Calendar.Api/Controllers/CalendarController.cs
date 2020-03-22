@@ -52,7 +52,12 @@ namespace keesing.Calendar.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Update(int id, Event @event)
         {
-            throw new NotImplementedException();
+            var isSuccess = _service.EditEvent(@event);
+
+            if (isSuccess)
+                return Ok(@event);
+            else
+                return NotFound();
         }
 
         [HttpGet]

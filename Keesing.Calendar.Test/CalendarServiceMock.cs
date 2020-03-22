@@ -29,7 +29,7 @@ namespace Keesing.Calendar.Test
             foreach (PropertyInfo property in properties)
             {
                 if (property.GetValue(@event) != null)
-                    property.SetValue(_events[@event.Id], @event);
+                    property.SetValue(_events[@event.Id], property.GetValue(@event));
             }
 
             return true;

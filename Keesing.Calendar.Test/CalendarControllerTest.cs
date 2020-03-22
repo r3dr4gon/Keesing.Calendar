@@ -76,6 +76,34 @@ namespace Keesing.Calendar.Test
             var response = _controller.Delete(fakeEvent.Id);
 
             // Assert
+            Assert.AreEqual(typeof(OkResult), response.GetType());
+        }
+
+        [TestMethod]
+        public void Edit_NotExistingIdPassed_ReturnsNotFoundResponse()
+        {
+            // Arrange
+            var fakeEvent = Helpers.FakeEventGen();
+            // Act
+            var response = _controller.Update(int.MaxValue, fakeEvent); // DB is empty thus any id will work here.
+
+            // Assert
+            Assert.AreEqual(typeof(NotFoundResult), response.GetType());
+        }
+
+        [TestMethod]
+        public void Edit_ExistingIdPassed_ReturnsOkObjectResult()
+        {
+            // Arrange
+            var fakeEvent = Helpers.FakeEventGen();
+            _controller.Post(fakeEvent);
+            fakeEvent.Name = "Let's Update";
+
+            //Act
+            var response = _controller.Update(fakeEvent.Id, fakeEvent);
+            var result = response as OkObjectResult;
+
+            // Assert
             Assert.AreEqual(typeof(OkObjectResult), response.GetType());
         }
 
