@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Keesing.Calendar.Api.Models;
 using Keesing.Calendar.Api.Services;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +24,7 @@ namespace keesing.Calendar.Api.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult Add(Event @event)
+        public ActionResult Add(Event @event)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +33,7 @@ namespace keesing.Calendar.Api.Controllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -42,14 +43,14 @@ namespace keesing.Calendar.Api.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Update(int id, Event @event)
+        public ActionResult Update(int id, Event @event)
         {
             throw new NotImplementedException();
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetAll()
+        public ActionResult<IEnumerable<Event>> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -57,7 +58,7 @@ namespace keesing.Calendar.Api.Controllers
         [HttpGet]
         [Route("query")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetBy(int? id, string name, string eventOrganizer, string location)
+        public ActionResult<IEnumerable<Event>> GetBy(int? id, string name, string eventOrganizer, string location)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +66,7 @@ namespace keesing.Calendar.Api.Controllers
         [HttpGet]
         [Route("sort")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetAllSorted()
+        public ActionResult<IEnumerable<Event>> GetAllSorted()
         {
             throw new NotImplementedException();
         }
