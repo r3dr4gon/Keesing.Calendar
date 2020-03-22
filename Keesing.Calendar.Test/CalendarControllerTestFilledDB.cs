@@ -72,7 +72,7 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
-        public void GetByEventId_FilledDB_WhenCalled_ReturnsArray()
+        public void GetByEventId_FilledDB_WhenCalled_ReturnsEvent()
         {
             // Act
             const int _id = 0;
@@ -86,7 +86,7 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
-        public void GetByEventName_FilledDB_WhenCalled_ReturnsArray()
+        public void GetByEventName_FilledDB_WhenCalled_ReturnEvent()
         {
             // Act
             string _name = Helpers.GetJoopOutEvent().Name;
