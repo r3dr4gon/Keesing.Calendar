@@ -40,7 +40,7 @@ namespace Keesing.Calendar.Test
         }        
         
         [TestMethod]
-        public void Post__ValidObjectPassed_ReturnedResponseHasCreatedItem()
+        public void Post_ValidObjectPassed_ReturnedResponseHasCreatedItem()
         {
             // Arrange
             var fakeEvent = Helpers.FakeEventGen();
@@ -53,6 +53,30 @@ namespace Keesing.Calendar.Test
             // Assert
             Assert.AreEqual(typeof(Event), sentEvent.GetType());
             Assert.AreEqual(sentEvent,fakeEvent);
+        }
+
+        [TestMethod]
+        public void Delete_NotExistingIdPassed_ReturnsNotFoundResponse()
+        {
+            // Act
+            var response = _controller.Delete(int.MaxValue); // DB is empty thus any id will work here.
+
+            // Assert
+            Assert.AreEqual(typeof(NotFoundResult), response.GetType());
+        }
+
+        [TestMethod]
+        public void Delete_ExistingIdPassed_ReturnsOkResult()
+        {
+            // Arrange
+            var fakeEvent = Helpers.FakeEventGen();
+            _controller.Post(fakeEvent);
+
+            //Act
+            var response = _controller.Delete(fakeEvent.Id);
+
+            // Assert
+            Assert.AreEqual(typeof(OkObjectResult), response.GetType());
         }
 
         [TestMethod]

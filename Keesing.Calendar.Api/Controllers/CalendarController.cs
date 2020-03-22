@@ -37,7 +37,12 @@ namespace keesing.Calendar.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            var isSuccess = _service.DeleteEvent(id);
+
+            if (isSuccess)
+                return Ok();
+            else
+                return NotFound();
         }
 
         [HttpPut]
