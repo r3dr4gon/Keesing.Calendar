@@ -101,6 +101,77 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
+        public void GetByEventId_EmptyDB_WhenCalled_ReturnsEvent()
+        {
+            // Act
+            const int _id = int.MaxValue; // DB is empty thus any id will work here.
+            var response = _controller.GetBy(id: _id);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNull(result.Value);
+        }
+
+        [TestMethod]
+        public void GetByEventName_EmptyedDB_WhenCalled_ReturnEvent()
+        {
+            // Act
+            string _name = "The Joker"; // DB is empty thus any name will work here.
+            var response = _controller.GetBy(name: _name);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNull(result.Value);
+        }
+
+        [TestMethod]
+        public void GetByEventOrganizer_EmptyDB_WhenCalled_ReturnsArray()
+        {
+            // Act
+            const string _eventOrganizer = "The Joker"; // DB is empty thus any name will work here.
+            var response = _controller.GetBy(eventOrganizer: _eventOrganizer);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            foreach (var @event in events)
+            {
+                Assert.IsTrue(@event.EventOrganizer == _eventOrganizer);
+            }
+        }
+
+        [TestMethod]
+        public void GetByEventLocation_FilledDB_WhenCalled_ReturnsArray()
+        {
+            // Act
+            const string _location = "The Joker House"; // DB is empty thus any location will work here.
+            var response = _controller.GetBy(location: _location);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            foreach (var @event in events)
+            {
+                Assert.IsTrue(@event.Location == _location);
+            }
+        }
+
+        [TestMethod]
+        public void GetBy_EmptyDB_WhenCalled_ReturnsEmptyArray()
+        {
+            // Act
+            var response = _controller.GetBy();
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            Assert.AreEqual(events.Length, 0);
+        }
+
+        [TestMethod]
         public void GetAllSorted_EmptyDB_WhenCalled_ReturnsEmptyArray()
         {
             // Act

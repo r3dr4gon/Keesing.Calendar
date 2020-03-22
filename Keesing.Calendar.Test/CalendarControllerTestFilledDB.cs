@@ -134,6 +134,19 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
+        public void GetBy_FilledDB_WhenCalled_ReturnsNotFilteredDB()
+        {
+            // Act
+            var response = _controller.GetBy();
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            Assert.IsTrue(events.Length == 4);
+        }
+
+        [TestMethod]
         public void GetAllSorted_FilledDB_WhenCalled_ReturnsSortedArray()
         {
             // Arrange

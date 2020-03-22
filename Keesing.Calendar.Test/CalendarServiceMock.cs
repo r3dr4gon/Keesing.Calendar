@@ -57,12 +57,18 @@ namespace Keesing.Calendar.Test
 
         public Event GetEventById(int id)
         {
-            return _events[id];
+            if (_events.ContainsKey(id))
+                return _events[id];
+            else
+                return null;
         }
 
         public Event GetEventByName(string name)
         {
-            return _events[_secondaryKey[name]];
+            if (_secondaryKey.ContainsKey(name))
+                return _events[_secondaryKey[name]];
+            else
+                return null;
         }
 
         public Event[] GetAllEvents()
