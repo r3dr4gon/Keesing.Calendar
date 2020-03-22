@@ -8,13 +8,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Keesing.Calendar.Test
 {
     [TestClass]
-    public class CalendarControllerTest
+    public class CalendarControllerTestEmptyDB
     {
         CalendarController _controller;
         ICalendarService _service;
         ILogger<CalendarController> _logger;
 
-        public CalendarControllerTest()
+        public CalendarControllerTestEmptyDB()
         {
             var loggerFactory = LoggerFactory.Create(builder =>
             {
@@ -66,45 +66,15 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
-        public void Delete_ExistingIdPassed_ReturnsOkResult()
-        {
-            // Arrange
-            var fakeEvent = Helpers.FakeEventGen();
-            _controller.Post(fakeEvent);
-
-            //Act
-            var response = _controller.Delete(fakeEvent.Id);
-
-            // Assert
-            Assert.AreEqual(typeof(OkResult), response.GetType());
-        }
-
-        [TestMethod]
         public void Edit_NotExistingIdPassed_ReturnsNotFoundResponse()
         {
             // Arrange
             var fakeEvent = Helpers.FakeEventGen();
             // Act
-            var response = _controller.Update(int.MaxValue, fakeEvent); // DB is empty thus any id will work here.
+            var response = _controller.Update(fakeEvent.Id, fakeEvent); // DB is empty thus any id will work here.
 
             // Assert
             Assert.AreEqual(typeof(NotFoundResult), response.GetType());
-        }
-
-        [TestMethod]
-        public void Edit_ExistingIdPassed_ReturnsOkObjectResult()
-        {
-            // Arrange
-            var fakeEvent = Helpers.FakeEventGen();
-            _controller.Post(fakeEvent);
-            fakeEvent.Name = "Let's Update";
-
-            //Act
-            var response = _controller.Update(fakeEvent.Id, fakeEvent);
-            var result = response as OkObjectResult;
-
-            // Assert
-            Assert.AreEqual(typeof(OkObjectResult), response.GetType());
         }
 
         [TestMethod]
@@ -128,23 +98,6 @@ namespace Keesing.Calendar.Test
             Assert.IsNotNull(result.Value);
             var events = result.Value as Event[];
             Assert.AreEqual(events.Length, 0);
-        }
-
-        [TestMethod]
-        public void Post_GetAll_NotEmptyDB_WhenCalled_ReturnsArray()
-        {
-            // Arrange
-            var fakeEvent = Helpers.FakeEventGen();
-            _controller.Post(fakeEvent);
-
-            // Act
-            var response = _controller.GetAll();
-            var result = response.Result as OkObjectResult;
-
-            // Assert
-            Assert.IsNotNull(result.Value);
-            var events = result.Value as Event[];
-            Assert.AreEqual(events.Length, 1);
         }
     }
 }

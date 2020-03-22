@@ -13,6 +13,16 @@ namespace Keesing.Calendar.Test
         private IDictionary<int, Event> _events = new Dictionary<int, Event>();
         private IDictionary<string, int> _secondaryKey = new Dictionary<string, int>();
 
+        public CalendarServiceMock() { }
+
+        public CalendarServiceMock(Event[] events)
+        {
+            foreach (var @event in events)
+            {
+                AddEvent(@event);
+            }
+        }
+
         public void AddEvent(Event @event)
         {
             _secondaryKey.Add(@event.Name, @event.Id);
@@ -58,6 +68,13 @@ namespace Keesing.Calendar.Test
         public Event[] GetAllEvents()
         {
             return _events.Values.ToArray();
+        }
+
+        public Event[] GetAllEventsSortedBy(string sortParameter)
+        {
+            PropertyInfo prop = typeof(Event).GetProperty("sortParameter");
+
+            return _events.Values.OrderByDescending(@event => prop.GetValue(@event, null)).ToArray(); ;
         }
     }
 }
