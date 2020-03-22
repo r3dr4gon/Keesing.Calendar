@@ -72,7 +72,7 @@ namespace Keesing.Calendar.Test
 
         public Event[] GetAllEventsSortedBy(string sortParameter)
         {
-            PropertyInfo prop = typeof(Event).GetProperty("sortParameter");
+            PropertyInfo prop = typeof(Event).GetProperty(sortParameter);
 
             return _events.Values.OrderByDescending(@event => prop.GetValue(@event, null)).ToArray(); ;
         }

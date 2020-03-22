@@ -99,5 +99,18 @@ namespace Keesing.Calendar.Test
             var events = result.Value as Event[];
             Assert.AreEqual(events.Length, 0);
         }
+
+        [TestMethod]
+        public void GetAllSorted_EmptyDB_WhenCalled_ReturnsEmptyArray()
+        {
+            // Act
+            var response = _controller.GetAllSorted();
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            Assert.AreEqual(events.Length, 0);
+        }
     }
 }

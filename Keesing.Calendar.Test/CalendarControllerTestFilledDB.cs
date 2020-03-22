@@ -49,7 +49,6 @@ namespace Keesing.Calendar.Test
         {
             // Arrange
             var joopOutEvent = Helpers.GetJoopOutEvent();
-
             joopOutEvent.Name = "Let's Update";
 
             //Act
@@ -70,6 +69,26 @@ namespace Keesing.Calendar.Test
             Assert.IsNotNull(result.Value);
             var events = result.Value as Event[];
             Assert.AreEqual(events.Length, 4);
+        }
+
+        [TestMethod]
+        public void GetAllSorted_FilledDB_WhenCalled_ReturnsEmptyArray()
+        {
+            // Arrange
+            int lastEventTime = int.MaxValue;
+
+            // Act
+            var response = _controller.GetAllSorted();
+            var result = response.Result as OkObjectResult;
+            var events = result.Value as Event[];
+
+            // Assert
+            Assert.IsNotNull(events);
+            foreach (var @event in events)
+            {
+                Assert.IsTrue(@event.Time <= lastEventTime);
+                lastEventTime = @event.Time;
+            }
         }
     }
 }

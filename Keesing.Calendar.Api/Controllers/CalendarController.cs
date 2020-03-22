@@ -82,7 +82,7 @@ namespace keesing.Calendar.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Event>> GetAllSorted()
         {
-            return _service.GetAllEventsSortedBy("Time");
+            return Ok(_service.GetAllEventsSortedBy("Time"));
         }
     }
 }
