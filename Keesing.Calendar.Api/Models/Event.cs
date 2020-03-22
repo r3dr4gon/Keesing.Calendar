@@ -5,7 +5,7 @@ namespace Keesing.Calendar.Api.Models
 {
     public class Event
     {
-        Event()
+        public Event()
         {
             lock (_lockObj)
             {
