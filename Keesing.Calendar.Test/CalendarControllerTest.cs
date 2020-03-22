@@ -30,10 +30,47 @@ namespace Keesing.Calendar.Test
         public void GetAll_EmptyDB_WhenCalled_ReturnsOkResult()
         {
             // Act
-            var result = _controller.GetAll();
+            var response = _controller.GetAll();
 
             // Assert
-            Assert.AreEqual(typeof(OkObjectResult), result.Result);
+            Assert.AreEqual(typeof(OkObjectResult), response.Result.GetType());
+        }
+
+        [TestMethod]
+        public void GetAll_EmptyDB_WhenCalled_ReturnsEmptyArray()
+        {
+            // Act
+            var response = _controller.GetAll();
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            Assert.AreEqual(events.Length, 0);
+        }
+
+        [TestMethod]
+        public void Post_GetAll_NotEmptyDB_WhenCalled_ReturnsArray()
+        {
+            // Arrange
+            var fakeEvet = new Event
+            {
+                Name = "Testing party",
+                Time = 0,
+                Location = "Here",
+                Members = "All by myself",
+                EventOrganizer = "Myself"
+            };
+            _controller.Post(fakeEvet);
+
+            // Act
+            var response = _controller.GetAll();
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            Assert.AreEqual(events.Length, 1);
         }
     }
 }

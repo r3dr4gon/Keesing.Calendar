@@ -24,9 +24,11 @@ namespace keesing.Calendar.Api.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult Add(Event @event)
+        public ActionResult Post(Event @event)
         {
-            throw new NotImplementedException();
+            _service.AddEvent(@event);
+
+            return Ok();
         }
 
         [HttpDelete]
@@ -50,9 +52,11 @@ namespace keesing.Calendar.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<Event>> GetAll()
+        public ActionResult<Event[]> GetAll()
         {
-            throw new NotImplementedException();
+            var allEvents = _service.GetAllEvents();
+
+            return Ok(allEvents);
         }
 
         [HttpGet]
