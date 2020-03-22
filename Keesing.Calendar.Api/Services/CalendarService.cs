@@ -20,17 +20,22 @@ namespace Keesing.Calendar.Api.Services
             throw new NotImplementedException();
         }
 
-        public Event[] GetAllEvents()
-        {
-            throw new NotImplementedException();
-        }
-
         public Event GetEventById(int id)
         {
             throw new NotImplementedException();
         }
 
         public Event GetEventByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Event[] GetAllEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Event[] GetAllEventsSortedBy(string sortParameter)
         {
             throw new NotImplementedException();
         }

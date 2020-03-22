@@ -15,5 +15,7 @@ namespace Keesing.Calendar.Api.Services
         Event GetEventByName(string name);
 
         Event[] GetAllEvents();
+
+        public Event[] GetAllEventsSortedBy(string sortParameter);
     }
 }
