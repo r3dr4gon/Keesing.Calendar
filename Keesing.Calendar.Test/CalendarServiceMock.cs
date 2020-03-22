@@ -8,17 +8,10 @@ using System.Text;
 
 namespace Keesing.Calendar.Test
 {
-    class CalendarServiceMockEmpty : ICalendarService
+    class CalendarServiceMock : ICalendarService
     {
         private IDictionary<int, Event> _events = new Dictionary<int, Event>();
         private IDictionary<string, int> _secondaryKey = new Dictionary<string, int>();
-
-        public CalendarServiceMockEmpty() { }
-
-        public CalendarServiceMockEmpty(Event[] events)
-        {
-            
-        }
 
         public void AddEvent(Event @event)
         {
