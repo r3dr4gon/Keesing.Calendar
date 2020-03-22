@@ -1,5 +1,6 @@
 ﻿using System;
-using keesing.Calendar.Api.Models;
+using Keesing.Calendar.Api.Models;
+using Keesing.Calendar.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,16 +12,18 @@ namespace keesing.Calendar.Api.Controllers
     public class CalendarController : ControllerBase
     {
         private readonly ILogger<CalendarController> _logger;
+        private readonly ICalendarService _service;
 
-        public CalendarController(ILogger<CalendarController> logger)
+        public CalendarController(ILogger<CalendarController> logger, ICalendarService service)
         {
             _logger = logger;
+            _service = service;
         }
 
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult Post(Event @event)
+        public IActionResult Add(Event @event)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +42,7 @@ namespace keesing.Calendar.Api.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Put(int id, Event @event)
+        public IActionResult Update(int id, Event @event)
         {
             throw new NotImplementedException();
         }
