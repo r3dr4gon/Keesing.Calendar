@@ -27,6 +27,35 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
+        public void Post_WhenCalled_ReturnsCreatedResult()
+        {
+            // Arrange
+            var fakeEvent = Helpers.FakeEventGen();
+
+            // Act
+            var response = _controller.Post(fakeEvent);
+
+            // Assert
+            Assert.AreEqual(typeof(CreatedAtActionResult), response.GetType());
+        }        
+        
+        [TestMethod]
+        public void Post__ValidObjectPassed_ReturnedResponseHasCreatedItem()
+        {
+            // Arrange
+            var fakeEvent = Helpers.FakeEventGen();
+
+            // Act
+            var response = _controller.Post(fakeEvent);
+            var result = response as CreatedAtActionResult;
+            var sentEvent = result.Value;
+
+            // Assert
+            Assert.AreEqual(typeof(Event), sentEvent.GetType());
+            Assert.AreEqual(sentEvent,fakeEvent);
+        }
+
+        [TestMethod]
         public void GetAll_EmptyDB_WhenCalled_ReturnsOkResult()
         {
             // Act
@@ -53,15 +82,8 @@ namespace Keesing.Calendar.Test
         public void Post_GetAll_NotEmptyDB_WhenCalled_ReturnsArray()
         {
             // Arrange
-            var fakeEvet = new Event
-            {
-                Name = "Testing party",
-                Time = 0,
-                Location = "Here",
-                Members = "All by myself",
-                EventOrganizer = "Myself"
-            };
-            _controller.Post(fakeEvet);
+            var fakeEvent = Helpers.FakeEventGen();
+            _controller.Post(fakeEvent);
 
             // Act
             var response = _controller.GetAll();

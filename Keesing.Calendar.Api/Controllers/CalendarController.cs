@@ -28,7 +28,7 @@ namespace keesing.Calendar.Api.Controllers
         {
             _service.AddEvent(@event);
 
-            return Ok();
+            return CreatedAtAction(nameof(Post), @event);
         }
 
         [HttpDelete]
@@ -52,7 +52,7 @@ namespace keesing.Calendar.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Event[]> GetAll()
+        public ActionResult<IEnumerable<Event>> GetAll()
         {
             var allEvents = _service.GetAllEvents();
 
