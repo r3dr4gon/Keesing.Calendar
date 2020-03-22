@@ -134,7 +134,7 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
-        public void GetAllSorted_FilledDB_WhenCalled_ReturnsEmptyArray()
+        public void GetAllSorted_FilledDB_WhenCalled_ReturnsSortedArray()
         {
             // Arrange
             int lastEventTime = int.MaxValue;
