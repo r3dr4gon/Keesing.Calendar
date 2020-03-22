@@ -35,6 +35,11 @@ namespace Keesing.Calendar.Api.Services
             throw new NotImplementedException();
         }
 
+        public Event[] GetAllEventsBy(string filterField, string filterValue)
+        {
+            throw new NotImplementedException();
+        }
+
         public Event[] GetAllEventsSortedBy(string sortParameter)
         {
             throw new NotImplementedException();

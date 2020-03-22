@@ -59,7 +59,7 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
-        public void Post_GetAll_FilledDB_WhenCalled_ReturnsArray()
+        public void GetAll_FilledDB_WhenCalled_ReturnsArray()
         {
             // Act
             var response = _controller.GetAll();
@@ -69,6 +69,68 @@ namespace Keesing.Calendar.Test
             Assert.IsNotNull(result.Value);
             var events = result.Value as Event[];
             Assert.AreEqual(events.Length, 4);
+        }
+
+        [TestMethod]
+        public void GetByEventId_FilledDB_WhenCalled_ReturnsArray()
+        {
+            // Act
+            const int _id = 0;
+            var response = _controller.GetBy(id: _id);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var @event = result.Value as Event;
+            Assert.AreEqual(@event.Id, _id);
+        }
+
+        [TestMethod]
+        public void GetByEventName_FilledDB_WhenCalled_ReturnsArray()
+        {
+            // Act
+            string _name = Helpers.GetJoopOutEvent().Name;
+            var response = _controller.GetBy(name: _name);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var @event = result.Value as Event;
+            Assert.AreEqual(@event.Name, _name);
+        }
+
+        [TestMethod]
+        public void GetByEventOrganizer_FilledDB_WhenCalled_ReturnsArray()
+        {
+            // Act
+            const string _eventOrganizer = "Bob";
+            var response = _controller.GetBy(eventOrganizer : _eventOrganizer);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            foreach (var @event in events)
+            {
+                Assert.IsTrue(@event.EventOrganizer == _eventOrganizer);
+            }
+        }
+
+        [TestMethod]
+        public void GetByEventLocation_FilledDB_WhenCalled_ReturnsArray()
+        {
+            // Act
+            const string _location = "Bob House";
+            var response = _controller.GetBy(location: _location);
+            var result = response.Result as OkObjectResult;
+
+            // Assert
+            Assert.IsNotNull(result.Value);
+            var events = result.Value as Event[];
+            foreach (var @event in events)
+            {
+                Assert.IsTrue(@event.Location == _location);
+            }
         }
 
         [TestMethod]

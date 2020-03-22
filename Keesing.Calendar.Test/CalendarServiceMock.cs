@@ -70,11 +70,18 @@ namespace Keesing.Calendar.Test
             return _events.Values.ToArray();
         }
 
+        public Event[] GetAllEventsBy(string filterField, string filterValue)
+        {
+            PropertyInfo prop = typeof(Event).GetProperty(filterField);
+
+            return _events.Values.Where(@event => prop.GetValue(@event, null).ToString() == filterValue).ToArray();
+        }
+
         public Event[] GetAllEventsSortedBy(string sortParameter)
         {
             PropertyInfo prop = typeof(Event).GetProperty(sortParameter);
 
-            return _events.Values.OrderByDescending(@event => prop.GetValue(@event, null)).ToArray(); ;
+            return _events.Values.OrderByDescending(@event => prop.GetValue(@event, null)).ToArray();
         }
     }
 }

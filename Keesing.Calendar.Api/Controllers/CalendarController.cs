@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Keesing.Calendar.Api.Models;
 using Keesing.Calendar.Api.Services;
 using Microsoft.AspNetCore.Http;
@@ -72,9 +73,26 @@ namespace keesing.Calendar.Api.Controllers
         [HttpGet]
         [Route("query")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<Event>> GetBy(int? id, string name, string eventOrganizer, string location)
+        public ActionResult<IEnumerable<Event>> GetBy(int? id = null, string name = null, string eventOrganizer = null, string location = null)
         {
-            throw new NotImplementedException();
+            if (id != null)
+            {
+                return Ok(_service.GetEventById(id.Value));
+            }
+            else if (name != null)
+            {
+                return Ok(_service.GetEventByName(name));
+            }
+            else if (eventOrganizer != null)
+            {
+                return Ok(_service.GetAllEventsBy(nameof(Event.EventOrganizer), eventOrganizer));
+            }
+            else if (location != null)
+            {
+                return Ok(_service.GetAllEventsBy(nameof(Event.Location), location));
+            }
+
+            return Ok(_service.GetAllEvents());
         }
 
         [HttpGet]
@@ -82,7 +100,7 @@ namespace keesing.Calendar.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Event>> GetAllSorted()
         {
-            return Ok(_service.GetAllEventsSortedBy("Time"));
+            return Ok(_service.GetAllEventsSortedBy(nameof(Event.Time)));
         }
     }
 }
