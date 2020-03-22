@@ -10,8 +10,8 @@ namespace Keesing.Calendar.Test
 {
     class CalendarServiceMock : ICalendarService
     {
-        private IDictionary<int, Event> _events = new Dictionary<int, Event>();
-        private IDictionary<string, int> _secondaryKey = new Dictionary<string, int>();
+        private readonly IDictionary<int, Event> _events = new Dictionary<int, Event>();
+        private readonly IDictionary<string, int> _secondaryKey = new Dictionary<string, int>();
 
         public CalendarServiceMock() { }
 

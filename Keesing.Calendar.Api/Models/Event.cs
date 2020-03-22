@@ -18,9 +18,9 @@ namespace Keesing.Calendar.Api.Models
         public string Location { get; set; }
         public string Members { get; set; }
         public string EventOrganizer { get; set; }
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        private static object _lockObj = new object();
+        private static readonly object _lockObj = new object();
         private static int _id = 0;
     }
 }

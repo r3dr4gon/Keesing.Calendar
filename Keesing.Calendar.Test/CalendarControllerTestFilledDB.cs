@@ -10,9 +10,9 @@ namespace Keesing.Calendar.Test
     [TestClass]
     public class CalendarControllerTestFilledDB
     {
-        CalendarController _controller;
-        ICalendarService _service;
-        ILogger<CalendarController> _logger;
+        readonly CalendarController _controller;
+        readonly ICalendarService _service;
+        readonly ILogger<CalendarController> _logger;
 
         public CalendarControllerTestFilledDB()
         {
