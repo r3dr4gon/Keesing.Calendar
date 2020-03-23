@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Keesing.Calendar.Api</name>
+    </assembly>
+    <members>
+        <member name="M:keesing.Calendar.Api.Controllers.CalendarController.Post(Keesing.Calendar.Api.Models.Event)">
+            <summary>
+            Add a new event to the Calendar.
+            </summary>
+            <remarks>Name field is required.</remarks>
+            <response code="201">Event created.</response>
+            <response code="400">Event could not be added due to a name field not being unique.</response>
+        </member>
+        <member name="M:keesing.Calendar.Api.Controllers.CalendarController.Delete(System.Int32)">
+            <summary>
+            Delete an event with id = {id} from the Calendar.
+            </summary>
+            <remarks></remarks>
+            <response code="200">Event deleted.</response>
+            <response code="404">Event could not be found.</response>
+        </member>
+        <member name="M:keesing.Calendar.Api.Controllers.CalendarController.Update(System.Int32,Keesing.Calendar.Api.Models.Event)">
+            <summary>
+            Edit an event with id = {id} in the Calendar.
+            </summary>
+            <remarks>The Event obj (sent in the request body) must have the same id.</remarks>
+            <response code="200">Event was updated successfully.</response>
+            <response code="404">Event could not be found or updated name is not unique.</response>
+        </member>
+        <member name="M:keesing.Calendar.Api.Controllers.CalendarController.GetAll">
+            <summary>
+            Get all events from the Calendar.
+            </summary>
+            <remarks></remarks>
+            <response code="200">All events were fetched.</response>
+        </member>
+        <member name="M:keesing.Calendar.Api.Controllers.CalendarController.GetBy(System.Nullable{System.Int32},System.String,System.String,System.String)">
+            <summary>
+            Get all events with matching filter condition from the Calendar.
+            </summary>
+            <remarks>Events will be fetch according to only one filter parameter.</remarks>
+            <response code="200">All events were fetched.</response>
+        </member>
+        <member name="M:keesing.Calendar.Api.Controllers.CalendarController.GetAllSorted">
+            <summary>
+            Get all events sorted by time (desc order) from the Calendar.
+            </summary>
+            <remarks></remarks>
+            <response code="200">All events were fetched and are ordered by time.</response>
+        </member>
+        <member name="P:Keesing.Calendar.Api.Models.Event.Name">
+            <summary>
+            The name of the event - must be unique.
+            </summary>
+            <example>Beach day</example>
+        </member>
+        <member name="P:Keesing.Calendar.Api.Models.Event.Time">
+            <summary>
+            The time of the event needs to be in Epoch format.
+            </summary>
+            <example>1584990001</example>
+        </member>
+        <member name="P:Keesing.Calendar.Api.Models.Event.Location">
+            <summary>
+            The location of the event.
+            </summary>
+            <example>Den haag beach</example>
+        </member>
+        <member name="P:Keesing.Calendar.Api.Models.Event.Members">
+            <summary>
+            The members which are invited to the event.
+            </summary>
+            <example>Den haag beach</example>
+        </member>
+        <member name="P:Keesing.Calendar.Api.Models.Event.EventOrganizer">
+            <summary>
+            The event organizer.
+            </summary>
+            <example>Batman</example>
+        </member>
+        <member name="P:Keesing.Calendar.Api.Models.Event.Id">
+            <summary>
+            Event id.
+            </summary>
+            <example>Is being auto generated.</example>
+        </member>
+    </members>
+</doc>

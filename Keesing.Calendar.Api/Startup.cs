@@ -38,6 +38,9 @@ namespace Keesing.Calendar.Api
                     Title = "Keesing Calendar API",
                     Description = "A code assignment for Keesing"
                 });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Keesing.Calendar.Api.xml");
+                c.IncludeXmlComments(filePath);
             });
         }
 

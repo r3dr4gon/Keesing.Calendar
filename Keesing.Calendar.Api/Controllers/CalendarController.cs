@@ -22,6 +22,12 @@ namespace keesing.Calendar.Api.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Add a new event to the Calendar.
+        /// </summary>
+        /// <remarks>Name field is required.</remarks>
+        /// <response code="201">Event created.</response>
+        /// <response code="400">Event could not be added due to a name field not being unique.</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -34,6 +40,12 @@ namespace keesing.Calendar.Api.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Delete an event with id = {id} from the Calendar.
+        /// </summary>
+        /// <remarks></remarks>
+        /// <response code="200">Event deleted.</response>
+        /// <response code="404">Event could not be found.</response>
         [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -48,6 +60,12 @@ namespace keesing.Calendar.Api.Controllers
                 return NotFound();
         }
 
+        /// <summary>
+        /// Edit an event with id = {id} in the Calendar.
+        /// </summary>
+        /// <remarks>The Event obj (sent in the request body) must have the same id.</remarks>
+        /// <response code="200">Event was updated successfully.</response>
+        /// <response code="404">Event could not be found or updated name is not unique.</response>
         [HttpPut]
         [Route("{id}")]
         [Consumes("application/json")]
@@ -63,6 +81,11 @@ namespace keesing.Calendar.Api.Controllers
                 return NotFound();
         }
 
+        /// <summary>
+        /// Get all events from the Calendar.
+        /// </summary>
+        /// <remarks></remarks>
+        /// <response code="200">All events were fetched.</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<Event>> GetAll()
@@ -72,6 +95,11 @@ namespace keesing.Calendar.Api.Controllers
             return Ok(allEvents);
         }
 
+        /// <summary>
+        /// Get all events with matching filter condition from the Calendar.
+        /// </summary>
+        /// <remarks>Events will be fetch according to only one filter parameter.</remarks>
+        /// <response code="200">All events were fetched.</response>
         [HttpGet]
         [Route("query")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -97,6 +125,11 @@ namespace keesing.Calendar.Api.Controllers
             return Ok(_service.GetAllEvents());
         }
 
+        /// <summary>
+        /// Get all events sorted by time (desc order) from the Calendar.
+        /// </summary>
+        /// <remarks></remarks>
+        /// <response code="200">All events were fetched and are ordered by time.</response>
         [HttpGet]
         [Route("sort")]
         [ProducesResponseType(StatusCodes.Status200OK)]
