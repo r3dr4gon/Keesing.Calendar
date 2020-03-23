@@ -6,9 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Keesing.Calendar.Test
+namespace Keesing.Calendar.Api.Services
 {
-    class CalendarServiceMock : ICalendarService
+    public class CalendarServiceMock : ICalendarService
     {
         private readonly IDictionary<int, Event> _events = new Dictionary<int, Event>();
         private readonly IDictionary<string, int> _secondaryKey = new Dictionary<string, int>();

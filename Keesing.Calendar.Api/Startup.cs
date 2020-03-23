@@ -26,7 +26,7 @@ namespace Keesing.Calendar.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICalendarService, CalendarService>();
+            services.AddScoped<ICalendarService, CalendarServiceMock>();
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
