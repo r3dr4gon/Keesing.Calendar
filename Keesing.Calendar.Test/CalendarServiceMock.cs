@@ -38,6 +38,16 @@ namespace Keesing.Calendar.Test
             if (!_events.ContainsKey(@event.Id))
                 return false;
 
+            if (@event.Name != null)
+            {
+                if (_secondaryKey.ContainsKey(@event.Name))
+                    if (_secondaryKey[@event.Name] != @event.Id)
+                        return false;
+
+                _secondaryKey.Remove(_events[@event.Id].Name);
+                _secondaryKey.Add(@event.Name, @event.Id);
+            }
+
             PropertyInfo[] properties = typeof(Event).GetProperties();
 
             foreach (PropertyInfo property in properties)
