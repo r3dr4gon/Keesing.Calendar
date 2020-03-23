@@ -35,6 +35,19 @@ namespace Keesing.Calendar.Test
         }
 
         [TestMethod]
+        public void Post_NameNotUnique_WhenCalled_ReturnsBadRequestResult()
+        {
+            // Arrange
+            var bobDrinksEvent = Helpers.GetBobDrinksEvent();
+
+            // Act
+            var response = _controller.Post(bobDrinksEvent);
+
+            // Assert
+            Assert.AreEqual(typeof(BadRequestResult), response.GetType());
+        }
+
+        [TestMethod]
         public void Delete_ExistingIdPassed_ReturnsOkResult()
         {
             //Act

@@ -37,8 +37,8 @@ namespace Keesing.Calendar.Test
 
             // Assert
             Assert.AreEqual(typeof(CreatedAtActionResult), response.GetType());
-        }        
-        
+        }
+
         [TestMethod]
         public void Post_ValidObjectPassed_ReturnedResponseHasCreatedItem()
         {

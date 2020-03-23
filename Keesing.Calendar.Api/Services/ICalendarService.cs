@@ -4,7 +4,7 @@ namespace Keesing.Calendar.Api.Services
 {
     public interface ICalendarService
     {
-        void AddEvent(Event @event);
+        bool AddEvent(Event @event);
 
         bool EditEvent(Event @event);
 

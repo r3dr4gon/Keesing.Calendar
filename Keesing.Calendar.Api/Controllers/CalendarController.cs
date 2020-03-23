@@ -25,11 +25,13 @@ namespace keesing.Calendar.Api.Controllers
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Post(Event @event)
         {
-            _service.AddEvent(@event);
+            if (_service.AddEvent(@event))
+                return CreatedAtAction(nameof(Post), @event);
 
-            return CreatedAtAction(nameof(Post), @event);
+            return BadRequest();
         }
 
         [HttpDelete]

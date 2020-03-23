@@ -44,5 +44,10 @@ namespace Keesing.Calendar.Api.Services
         {
             throw new NotImplementedException();
         }
+
+        bool ICalendarService.AddEvent(Event @event)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

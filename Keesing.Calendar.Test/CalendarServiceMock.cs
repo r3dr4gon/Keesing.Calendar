@@ -23,10 +23,14 @@ namespace Keesing.Calendar.Test
             }
         }
 
-        public void AddEvent(Event @event)
+        public bool AddEvent(Event @event)
         {
+            if (@event.Name == null || _secondaryKey.ContainsKey(@event.Name))
+                return false;
+
             _secondaryKey.Add(@event.Name, @event.Id);
             _events.Add(@event.Id, @event);
+            return true;
         }
 
         public bool EditEvent(Event @event)
