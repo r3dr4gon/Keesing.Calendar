@@ -34,10 +34,12 @@ namespace keesing.Calendar.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Post(Event @event)
         {
-            if (_service.AddEvent(@event))
-                return CreatedAtAction(nameof(Post), @event);
+            var isSuccess = _service.AddEvent(@event);
 
-            return BadRequest();
+            if (isSuccess)
+                return CreatedAtAction(nameof(Post), @event);
+            else
+                return BadRequest();
         }
 
         /// <summary>
